@@ -42,29 +42,56 @@
     class="min-h-screen bg-gray-50 text-industrial-black font-sans selection:bg-industrial-accent selection:text-white">
 
     <!-- Navbar -->
-    <nav
-        class="sticky top-0 z-50 bg-white border-b-2 border-black px-6 py-4 flex justify-between items-center shadow-md">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-black flex items-center justify-center text-white font-black text-lg">A</div>
-            <span class="font-black text-xl tracking-tighter uppercase">AssetTrack TI</span>
+    <nav class="sticky top-0 z-50 bg-white border-b-2 border-black px-4 md:px-6 py-4 shadow-md">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-black flex items-center justify-center text-white font-black text-lg">A</div>
+                <span class="font-black text-xl tracking-tighter uppercase">AssetTrack TI</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-6 font-mono text-sm font-bold">
+                <a href="#visuals"
+                    class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">VISUALIZAÇÃO</a>
+                <a href="#dashboard-preview"
+                    class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DASHBOARD</a>
+                <a href="#cases"
+                    class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DOCUMENTAÇÃO</a>
+                <a href="#workflow"
+                    class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">WORKFLOW</a>
+                <a href="#specs"
+                    class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">ESPECIFICAÇÕES</a>
+            </div>
+
+            <div class="flex gap-2 items-center">
+                <button
+                    class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-black text-white shadow-hard text-xs px-4 py-2 hidden md:block">LOGIN</button>
+                <button
+                    class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-accent text-white shadow-hard hover:-translate-y-[2px] hover:-translate-x-[2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-xs px-4 py-2">DEMO</button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden p-2 border-2 border-black ml-2 active:bg-gray-100 min-w-[44px] min-h-[44px] flex items-center justify-center">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
         </div>
-        <div class="hidden md:flex gap-6 font-mono text-sm font-bold">
-            <a href="#visuals"
-                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">VISUALIZAÇÃO</a>
-            <a href="#dashboard-preview"
-                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DASHBOARD</a>
-            <a href="#cases"
-                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DOCUMENTAÇÃO</a>
-            <a href="#workflow"
-                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">WORKFLOW</a>
-            <a href="#specs"
-                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">ESPECIFICAÇÕES</a>
-        </div>
-        <div class="flex gap-2">
+
+        <!-- Mobile Menu Container (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden mt-4 border-t-2 border-black pt-4 flex-col gap-4 pb-2 animate-fadeIn">
+            <a href="#visuals" onclick="toggleMobileMenu()"
+                class="font-mono font-bold text-sm uppercase py-3 border-b border-gray-200 block">VISUALIZAÇÃO</a>
+            <a href="#dashboard-preview" onclick="toggleMobileMenu()"
+                class="font-mono font-bold text-sm uppercase py-3 border-b border-gray-200 block">DASHBOARD</a>
+            <a href="#cases" onclick="toggleMobileMenu()"
+                class="font-mono font-bold text-sm uppercase py-3 border-b border-gray-200 block">DOCUMENTAÇÃO</a>
+            <a href="#workflow" onclick="toggleMobileMenu()"
+                class="font-mono font-bold text-sm uppercase py-3 border-b border-gray-200 block">WORKFLOW</a>
+            <a href="#specs" onclick="toggleMobileMenu()"
+                class="font-mono font-bold text-sm uppercase py-3 border-b border-gray-200 block">ESPECIFICAÇÕES</a>
             <button
-                class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-black text-white shadow-hard text-xs px-4 py-2 hidden md:block">LOGIN</button>
-            <button
-                class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-accent text-white shadow-hard hover:-translate-y-[2px] hover:-translate-x-[2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-xs px-4 py-2">DEMO</button>
+                class="w-full font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black bg-industrial-black text-white shadow-hard min-h-[44px]">LOGIN</button>
         </div>
     </nav>
 
@@ -569,91 +596,216 @@
                     </p>
                 </div>
                 <div class="font-mono text-xs text-right hidden md:block">
-                    LAST UPDATE: 2024-05-20<br/>
+                    LAST UPDATE: 2024-05-20<br />
                     DOC_ID: #8821-X
                 </div>
             </div>
 
             <!-- Tabs Navigation -->
             <div class="flex flex-wrap gap-2 mb-8 border-b-2 border-dashed border-gray-300 pb-4">
-                <button onclick="switchTab(0)" id="tab-btn-0" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-black text-white shadow-hard transition-all">Autenticação</button>
-                <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Ativos</button>
-                <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Solicitações</button>
-                <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Manutenção</button>
-                <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Histórico</button>
-                <button onclick="switchTab(5)" id="tab-btn-5" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Segurança</button>
-                <button onclick="switchTab(6)" id="tab-btn-6" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Admin</button>
+                <button onclick="switchTab(0)" id="tab-btn-0"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-black text-white shadow-hard transition-all">Autenticação</button>
+                <button onclick="switchTab(1)" id="tab-btn-1"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Ativos</button>
+                <button onclick="switchTab(2)" id="tab-btn-2"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Solicitações</button>
+                <button onclick="switchTab(3)" id="tab-btn-3"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Manutenção</button>
+                <button onclick="switchTab(4)" id="tab-btn-4"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Histórico</button>
+                <button onclick="switchTab(5)" id="tab-btn-5"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Segurança</button>
+                <button onclick="switchTab(6)" id="tab-btn-6"
+                    class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Admin</button>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8 animate-fadeIn">
                 <div class="lg:col-span-2">
-                    
+
                     <!-- Tab Content 0: Autenticação -->
-                    <div id="tab-content-0" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px]">
+                    <div id="tab-content-0"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px]">
                         <div class="space-y-6">
-                           <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
-                               <table class="w-full text-left border-collapse min-w-[600px]">
-                                   <thead class="bg-industrial-black text-white">
-                                       <tr>
-                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th>
-                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th>
-                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Descrição</th>
-                                       </tr>
-                                   </thead>
-                                   <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                       <tr><td class="p-3 font-bold">Login</td><td class="p-3 text-gray-600">/login</td><td class="p-3">JWT Http-only</td></tr>
-                                       <tr><td class="p-3 font-bold">Login QR</td><td class="p-3 text-gray-600">/login/qr</td><td class="p-3">Auth Alternativa (QR+PIN)</td></tr>
-                                       <tr><td class="p-3 font-bold">Meu QR</td><td class="p-3 text-gray-600">/meu-qrcode</td><td class="p-3">Crachá Digital</td></tr>
-                                       <tr><td class="p-3 font-bold">Perfil</td><td class="p-3 text-gray-600">/profile</td><td class="p-3">Dados Pessoais</td></tr>
-                                   </tbody>
-                               </table>
-                           </div>
-                           <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">ADMIN</div>
-                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">GERENTE_TI</div>
-                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">TECNICO</div>
-                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">USUARIO</div>
-                           </div>
+                            <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                <table class="w-full text-left border-collapse min-w-[600px]">
+                                    <thead class="bg-industrial-black text-white">
+                                        <tr>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Funcionalidade</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Rota</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                        <tr>
+                                            <td class="p-3 font-bold">Login</td>
+                                            <td class="p-3 text-gray-600">/login</td>
+                                            <td class="p-3">JWT Http-only</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Login QR</td>
+                                            <td class="p-3 text-gray-600">/login/qr</td>
+                                            <td class="p-3">Auth Alternativa (QR+PIN)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Meu QR</td>
+                                            <td class="p-3 text-gray-600">/meu-qrcode</td>
+                                            <td class="p-3">Crachá Digital</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Perfil</td>
+                                            <td class="p-3 text-gray-600">/profile</td>
+                                            <td class="p-3">Dados Pessoais</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                <div
+                                    class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">
+                                    ADMIN</div>
+                                <div
+                                    class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">
+                                    GERENTE_TI</div>
+                                <div
+                                    class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">
+                                    TECNICO</div>
+                                <div
+                                    class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">
+                                    USUARIO</div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Tab Content 1: Ativos -->
-                    <div id="tab-content-1" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
-                         <div class="space-y-4">
+                    <div id="tab-content-1"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="space-y-4">
                             <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                                 <table class="w-full text-left border-collapse min-w-[600px]">
-                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Endpoint</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <thead class="bg-industrial-black text-white">
+                                        <tr>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Ação</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Endpoint</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Permissão</th>
+                                        </tr>
+                                    </thead>
                                     <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                        <tr><td class="p-3 font-bold">Listar Ativos</td><td class="p-3">/assets</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Detalhes</td><td class="p-3">/assets/{id}</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Novo Ativo</td><td class="p-3">/assets/new</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Scanner</td><td class="p-3">/assets/scanner</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Baixa</td><td class="p-3">/assets/{id}/baixa</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Listar Ativos</td>
+                                            <td class="p-3">/assets</td>
+                                            <td class="p-3"><span
+                                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Detalhes</td>
+                                            <td class="p-3">/assets/{id}</td>
+                                            <td class="p-3"><span
+                                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Novo Ativo</td>
+                                            <td class="p-3">/assets/new</td>
+                                            <td class="p-3"><span
+                                                    class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Scanner</td>
+                                            <td class="p-3">/assets/scanner</td>
+                                            <td class="p-3"><span
+                                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Baixa</td>
+                                            <td class="p-3">/assets/{id}/baixa</td>
+                                            <td class="p-3"><span
+                                                    class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="flex gap-2 flex-wrap">
-                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Disponível</span>
-                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Em Uso</span>
-                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Manutenção</span>
-                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Armazenado</span>
-                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Baixado</span>
+                                <span
+                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Disponível</span>
+                                <span
+                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Em
+                                    Uso</span>
+                                <span
+                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Manutenção</span>
+                                <span
+                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Armazenado</span>
+                                <span
+                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Baixado</span>
                             </div>
-                         </div>
+                        </div>
                     </div>
 
                     <!-- Tab Content 2: Solicitações -->
-                    <div id="tab-content-2" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                    <div id="tab-content-2"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
                         <div class="space-y-6">
-                            <p class="font-mono text-sm text-gray-600">Gerenciamento de empréstimos e transferências de custódia.</p>
+                            <p class="font-mono text-sm text-gray-600">Gerenciamento de empréstimos e transferências de
+                                custódia.</p>
                             <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                                 <table class="w-full text-left border-collapse min-w-[600px]">
-                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <thead class="bg-industrial-black text-white">
+                                        <tr>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Funcionalidade</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Rota</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Permissão</th>
+                                        </tr>
+                                    </thead>
                                     <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                        <tr><td class="p-3 font-bold">Minhas Solicitações</td><td class="p-3">/solicitacoes</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Nova Solicitação</td><td class="p-3">/solicitacoes/new</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Aprovar</td><td class="p-3">/admin/solicitacoes/{id}/approve</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                        <tr><td class="p-3 font-bold">Rejeitar</td><td class="p-3">/admin/solicitacoes/{id}/reject</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Minhas Solicitações</td>
+                                            <td class="p-3">/solicitacoes</td>
+                                            <td class="p-3"><span
+                                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Nova Solicitação</td>
+                                            <td class="p-3">/solicitacoes/new</td>
+                                            <td class="p-3"><span
+                                                    class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Aprovar</td>
+                                            <td class="p-3">/admin/solicitacoes/{id}/approve</td>
+                                            <td class="p-3"><span
+                                                    class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Rejeitar</td>
+                                            <td class="p-3">/admin/solicitacoes/{id}/reject</td>
+                                            <td class="p-3"><span
+                                                    class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -661,46 +813,115 @@
                     </div>
 
                     <!-- Tab Content 3: Manutenção -->
-                    <div id="tab-content-3" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                    <div id="tab-content-3"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
                         <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                             <table class="w-full text-left border-collapse min-w-[600px]">
-                                <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                <thead class="bg-industrial-black text-white">
+                                    <tr>
+                                        <th
+                                            class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                            Funcionalidade</th>
+                                        <th
+                                            class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                            Rota</th>
+                                        <th
+                                            class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                            Permissão</th>
+                                    </tr>
+                                </thead>
                                 <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                    <tr><td class="p-3 font-bold">Listar Manutenções</td><td class="p-3">/maintenance</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                    <tr><td class="p-3 font-bold">Registrar</td><td class="p-3">/assets/{id}/manutencao</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                    <tr><td class="p-3 font-bold">Finalizar</td><td class="p-3">/maintenance/{id}/complete</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                    <tr>
+                                        <td class="p-3 font-bold">Listar Manutenções</td>
+                                        <td class="p-3">/maintenance</td>
+                                        <td class="p-3"><span
+                                                class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold">Registrar</td>
+                                        <td class="p-3">/assets/{id}/manutencao</td>
+                                        <td class="p-3"><span
+                                                class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold">Finalizar</td>
+                                        <td class="p-3">/maintenance/{id}/complete</td>
+                                        <td class="p-3"><span
+                                                class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     <!-- Tab Content 4: Histórico -->
-                    <div id="tab-content-4" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                    <div id="tab-content-4"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
                         <div class="space-y-4">
                             <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                                 <table class="w-full text-left border-collapse min-w-[600px]">
-                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <thead class="bg-industrial-black text-white">
+                                        <tr>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Funcionalidade</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Rota</th>
+                                            <th
+                                                class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                Permissão</th>
+                                        </tr>
+                                    </thead>
                                     <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                        <tr><td class="p-3 font-bold">Ver Histórico</td><td class="p-3">/movimentacoes</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                        <tr>
+                                            <td class="p-3 font-bold">Ver Histórico</td>
+                                            <td class="p-3">/movimentacoes</td>
+                                            <td class="p-3"><span
+                                                    class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="border-2 border-dashed border-gray-400 p-4 bg-gray-50">
                                 <h4 class="font-bold text-sm uppercase mb-3">Tipos de Movimentação (Log)</h4>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">EMPRESTIMO</span></div>
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">DEVOLUCAO</span></div>
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">TRANSFERENCIA</span></div>
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">MANUTENCAO</span></div>
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">BAIXA</span></div>
-                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">CADASTRO</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">EMPRESTIMO</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">DEVOLUCAO</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">TRANSFERENCIA</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">MANUTENCAO</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">BAIXA</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-industrial-accent"></div><span
+                                            class="font-mono text-xs">CADASTRO</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Tab Content 5: Segurança -->
-                    <div id="tab-content-5" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                    <div id="tab-content-5"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
                         <div class="space-y-4">
                             <div class="grid md:grid-cols-2 gap-4">
                                 <div class="bg-black text-white p-4 border border-gray-700">
@@ -726,29 +947,86 @@
                     </div>
 
                     <!-- Tab Content 6: Admin -->
-                    <div id="tab-content-6" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                    <div id="tab-content-6"
+                        class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
                         <div class="space-y-6">
                             <div>
-                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Gestão de Usuários</h4>
+                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Gestão de Usuários
+                                </h4>
                                 <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                                     <table class="w-full text-left border-collapse min-w-[600px]">
-                                        <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                        <thead class="bg-industrial-black text-white">
+                                            <tr>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Ação</th>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Rota</th>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Permissão</th>
+                                            </tr>
+                                        </thead>
                                         <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                            <tr><td class="p-3 font-bold">Listar</td><td class="p-3">/admin/users</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                            <tr><td class="p-3 font-bold">Editar</td><td class="p-3">/users/{id}/edit</td><td class="p-3"><span class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
-                                            <tr><td class="p-3 font-bold">Ativar/Desativar</td><td class="p-3">/users/{id}/toggle</td><td class="p-3"><span class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
+                                            <tr>
+                                                <td class="p-3 font-bold">Listar</td>
+                                                <td class="p-3">/admin/users</td>
+                                                <td class="p-3"><span
+                                                        class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-bold">Editar</td>
+                                                <td class="p-3">/users/{id}/edit</td>
+                                                <td class="p-3"><span
+                                                        class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-bold">Ativar/Desativar</td>
+                                                <td class="p-3">/users/{id}/toggle</td>
+                                                <td class="p-3"><span
+                                                        class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Departamentos (Setores)</h4>
+                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Departamentos
+                                    (Setores)</h4>
                                 <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
                                     <table class="w-full text-left border-collapse min-w-[600px]">
-                                        <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                        <thead class="bg-industrial-black text-white">
+                                            <tr>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Ação</th>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Rota</th>
+                                                <th
+                                                    class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">
+                                                    Permissão</th>
+                                            </tr>
+                                        </thead>
                                         <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
-                                            <tr><td class="p-3 font-bold">Gerenciar</td><td class="p-3">/setores</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
-                                            <tr><td class="p-3 font-bold">Criar</td><td class="p-3">/setores/new</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                            <tr>
+                                                <td class="p-3 font-bold">Gerenciar</td>
+                                                <td class="p-3">/setores</td>
+                                                <td class="p-3"><span
+                                                        class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-bold">Criar</td>
+                                                <td class="p-3">/setores/new</td>
+                                                <td class="p-3"><span
+                                                        class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -759,13 +1037,15 @@
                 </div>
                 <!-- Right Side Icon (Dynamic based on logic, but static here for simplicity unless added via JS) -->
                 <div class="space-y-6">
-                    <div class="bg-industrial-black text-white p-6 border-2 border-black shadow-hard h-full flex flex-col justify-center items-center text-center">
+                    <div
+                        class="bg-industrial-black text-white p-6 border-2 border-black shadow-hard h-full flex flex-col justify-center items-center text-center">
                         <div class="p-4 bg-industrial-accent rounded-full mb-4 text-black">
-                             <i id="module-icon" data-lucide="lock" class="w-8 h-8"></i>
+                            <i id="module-icon" data-lucide="lock" class="w-8 h-8"></i>
                         </div>
                         <h3 id="module-title" class="font-bold text-xl uppercase mb-2">Módulo: Autenticação</h3>
                         <p class="font-mono text-sm text-gray-400">
-                            Este módulo integra diretamente com o backend FastAPI e utiliza validação via Pydantic Schemas.
+                            Este módulo integra diretamente com o backend FastAPI e utiliza validação via Pydantic
+                            Schemas.
                         </p>
                     </div>
                 </div>
@@ -773,144 +1053,214 @@
         </div>
     </section>
 
-<!-- Commercial Cases -->
-        <section id="cases" class="py-20 bg-industrial-black text-white border-b-2 border-black">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div>
-            <span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">DOCUMENTAÇÃO COMERCIAL</span>
-            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mt-4">
-              Soluções por Setor
-            </h2>
-          </div>
-          <p class="font-mono text-gray-400 max-w-md text-sm md:text-base border-l-2 border-industrial-accent pl-4">
-            O AssetTrack TI resolve dores reais: visibilidade, responsabilização e agilidade em organizações com 50 a 1.500 ativos.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Case 1 -->
-            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
-              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
-                <div class="p-3 bg-black text-white"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
-                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">01</span>
-              </div>
-              <h3 class="font-black text-xl uppercase mb-1">Empresa de Médio Porte (Serviços)</h3>
-              <p class="font-mono text-xs text-gray-500 mb-4">Consultoria, Contabilidade, Advocacia (150–400 funcionários)</p>
-              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
-                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
-                <p class="text-xs text-gray-700 leading-tight">Muitos notebooks, monitores e acessórios 'sumiam' entre home office e escritório. Planilhas Excel desatualizadas geravam brigas sobre quem era responsável por qual equipamento.</p>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
-                <ul class="space-y-2 mb-4">
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Cada colaborador tem seu crachá digital com QR Code no celular.</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ao receber um notebook novo, o gerente de TI escaneia o QR do ativo + o QR do usuário para confirmar entrega e transferir custódia automaticamente.</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando o funcionário pede transferência (ex.: troca de departamento), cria uma solicitação, aprovação rápida e nova confirmação por QR.</span></li>
-                </ul>
-              </div>
-              <div class="mt-auto pt-4 border-t-2 border-black">
-                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Redução de 70–80% em extravios e discussões; auditoria fácil para compliance fiscal/contábil.</p>
-              </div>
-            </div>
-
-            <!-- Case 2 -->
-            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
-              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
-                <div class="p-3 bg-black text-white"><i data-lucide="store" class="w-6 h-6"></i></div>
-                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">02</span>
-              </div>
-              <h3 class="font-black text-xl uppercase mb-1">Rede de Varejo ou Franquias</h3>
-              <p class="font-mono text-xs text-gray-500 mb-4">Lojas de eletrônicos, farmácias, fast-food (20–80 unidades)</p>
-              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
-                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
-                <p class="text-xs text-gray-700 leading-tight">Equipamentos de PDV, impressoras fiscais, tablets de vendas e smartphones corporativos se perdiam entre filiais; manutenção demorada por falta de histórico.</p>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
-                <ul class="space-y-2 mb-4">
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ativos recebem QR Code na aquisição e são cadastrados com localização (filial + setor).</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Técnico de campo escaneia QR do ativo + QR do gerente da loja para confirmar entrega/instalação.</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando um equipamento vai para manutenção, o status muda para 'Manutenção' e o histórico registra tudo.</span></li>
-                </ul>
-              </div>
-              <div class="mt-auto pt-4 border-t-2 border-black">
-                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Controle centralizado sem precisar ligar para cada filial; redução significativa em custos de reposição desnecessária.</p>
-              </div>
-            </div>
-
-            <!-- Case 3 -->
-            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
-              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
-                <div class="p-3 bg-black text-white"><i data-lucide="factory" class="w-6 h-6"></i></div>
-                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">03</span>
-              </div>
-              <h3 class="font-black text-xl uppercase mb-1">Indústria ou Manufatura</h3>
-              <p class="font-mono text-xs text-gray-500 mb-4">Fábrica, Agronegócio, Logística (Dispositivos IoT)</p>
-              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
-                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
-                <p class="text-xs text-gray-700 leading-tight">Tablets rugged, scanners de código de barras, notebooks de chão de fábrica e smartphones de supervisores se perdiam ou tinham manutenção mal controlada.</p>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
-                <ul class="space-y-2 mb-4">
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>QR Code em cada dispositivo permite scan rápido no chão de fábrica ou no campo (sem precisar digitar número de série).</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Solicitação de empréstimo/devolução feita pelo usuário final via web (ex.: 'preciso de um tablet reserva para inventário').</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Relatórios de movimentações mostram histórico completo para auditorias de segurança do trabalho ou ISO.</span></li>
-                </ul>
-              </div>
-              <div class="mt-auto pt-4 border-t-2 border-black">
-                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Menos tempo parado por falta de equipamento; rastreabilidade total para investigações de incidentes.</p>
-              </div>
-            </div>
-
-            <!-- Case 4 -->
-            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
-              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
-                <div class="p-3 bg-black text-white"><i data-lucide="terminal" class="w-6 h-6"></i></div>
-                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">04</span>
-              </div>
-              <h3 class="font-black text-xl uppercase mb-1">Empresa de TI / Software House</h3>
-              <p class="font-mono text-xs text-gray-500 mb-4">Suporte técnico terceirizado (50–250 colaboradores)</p>
-              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
-                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
-                <p class="text-xs text-gray-700 leading-tight">Alto volume de empréstimos de equipamentos para devs, estagiários e técnicos em campo; dificuldade em saber quem está com qual máquina para upgrades ou recalls.</p>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
-                <ul class="space-y-2 mb-4">
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Login via QR + PIN agiliza acesso em estações compartilhadas ou em campo.</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Fluxo de solicitação → aprovação → confirmação de entrega por scan do QR do técnico.</span></li>
-                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Dashboard mostra % de ativos em uso vs. disponíveis, ajudando na compra planejada.</span></li>
-                </ul>
-              </div>
-              <div class="mt-auto pt-4 border-t-2 border-black">
-                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Processo de onboarding/offboarding muito mais rápido e seguro; menos risco de multas por licenças ou perda de hardware caro.</p>
-              </div>
-            </div>
-
-            <!-- CTA Card -->
-            <div class="bg-industrial-accent p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] flex flex-col justify-center items-center text-center">
-                <h3 class="font-black text-3xl uppercase text-white mb-4">Sua empresa se encaixa?</h3>
-                <p class="font-mono text-white/90 text-sm mb-6 max-w-sm">
-                  Temos soluções adaptáveis para o porte e segmento da sua organização.
+    <!-- Commercial Cases -->
+    <section id="cases" class="py-20 bg-industrial-black text-white border-b-2 border-black">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <span
+                        class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">DOCUMENTAÇÃO
+                        COMERCIAL</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mt-4">
+                        Soluções por Setor
+                    </h2>
+                </div>
+                <p
+                    class="font-mono text-gray-400 max-w-md text-sm md:text-base border-l-2 border-industrial-accent pl-4">
+                    O AssetTrack TI resolve dores reais: visibilidade, responsabilização e agilidade em organizações com
+                    50 a 1.500 ativos.
                 </p>
-                <a href="https://wa.me/5554991680204?text=Gostaria%20de%20saber%20mais%20sobre%3F" target="_blank" rel="noopener noreferrer" class="w-full">
-                  <button class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-white bg-white text-black shadow-hard hover:bg-gray-100 w-full flex justify-center items-center gap-2">
-                    FALAR COM DESENVOLVEDOR <i data-lucide="arrow-right" size="16"></i>
-                  </button>
-                </a>
             </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Case 1 -->
+                <div
+                    class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+                    <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                        <div class="p-3 bg-black text-white"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                        <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">01</span>
+                    </div>
+                    <h3 class="font-black text-xl uppercase mb-1">Empresa de Médio Porte (Serviços)</h3>
+                    <p class="font-mono text-xs text-gray-500 mb-4">Consultoria, Contabilidade, Advocacia (150–400
+                        funcionários)</p>
+                    <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                        <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i
+                                data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                        <p class="text-xs text-gray-700 leading-tight">Muitos notebooks, monitores e acessórios 'sumiam'
+                            entre home office e escritório. Planilhas Excel desatualizadas geravam brigas sobre quem era
+                            responsável por qual equipamento.</p>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Cada colaborador tem
+                                    seu crachá digital com QR Code no celular.</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ao receber um
+                                    notebook novo, o gerente de TI escaneia o QR do ativo + o QR do usuário para
+                                    confirmar entrega e transferir custódia automaticamente.</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando o funcionário
+                                    pede transferência (ex.: troca de departamento), cria uma solicitação, aprovação
+                                    rápida e nova confirmação por QR.</span></li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-4 border-t-2 border-black">
+                        <p class="font-mono text-xs"><span
+                                class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Redução de
+                            70–80% em extravios e discussões; auditoria fácil para compliance fiscal/contábil.</p>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div
+                    class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+                    <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                        <div class="p-3 bg-black text-white"><i data-lucide="store" class="w-6 h-6"></i></div>
+                        <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">02</span>
+                    </div>
+                    <h3 class="font-black text-xl uppercase mb-1">Rede de Varejo ou Franquias</h3>
+                    <p class="font-mono text-xs text-gray-500 mb-4">Lojas de eletrônicos, farmácias, fast-food (20–80
+                        unidades)</p>
+                    <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                        <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i
+                                data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                        <p class="text-xs text-gray-700 leading-tight">Equipamentos de PDV, impressoras fiscais, tablets
+                            de vendas e smartphones corporativos se perdiam entre filiais; manutenção demorada por falta
+                            de histórico.</p>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ativos recebem QR
+                                    Code na aquisição e são cadastrados com localização (filial + setor).</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Técnico de campo
+                                    escaneia QR do ativo + QR do gerente da loja para confirmar
+                                    entrega/instalação.</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando um
+                                    equipamento vai para manutenção, o status muda para 'Manutenção' e o histórico
+                                    registra tudo.</span></li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-4 border-t-2 border-black">
+                        <p class="font-mono text-xs"><span
+                                class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Controle
+                            centralizado sem precisar ligar para cada filial; redução significativa em custos de
+                            reposição desnecessária.</p>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div
+                    class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+                    <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                        <div class="p-3 bg-black text-white"><i data-lucide="factory" class="w-6 h-6"></i></div>
+                        <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">03</span>
+                    </div>
+                    <h3 class="font-black text-xl uppercase mb-1">Indústria ou Manufatura</h3>
+                    <p class="font-mono text-xs text-gray-500 mb-4">Fábrica, Agronegócio, Logística (Dispositivos IoT)
+                    </p>
+                    <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                        <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i
+                                data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                        <p class="text-xs text-gray-700 leading-tight">Tablets rugged, scanners de código de barras,
+                            notebooks de chão de fábrica e smartphones de supervisores se perdiam ou tinham manutenção
+                            mal controlada.</p>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>QR Code em cada
+                                    dispositivo permite scan rápido no chão de fábrica ou no campo (sem precisar digitar
+                                    número de série).</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Solicitação de
+                                    empréstimo/devolução feita pelo usuário final via web (ex.: 'preciso de um tablet
+                                    reserva para inventário').</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Relatórios de
+                                    movimentações mostram histórico completo para auditorias de segurança do trabalho ou
+                                    ISO.</span></li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-4 border-t-2 border-black">
+                        <p class="font-mono text-xs"><span
+                                class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Menos tempo
+                            parado por falta de equipamento; rastreabilidade total para investigações de incidentes.</p>
+                    </div>
+                </div>
+
+                <!-- Case 4 -->
+                <div
+                    class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+                    <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                        <div class="p-3 bg-black text-white"><i data-lucide="terminal" class="w-6 h-6"></i></div>
+                        <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">04</span>
+                    </div>
+                    <h3 class="font-black text-xl uppercase mb-1">Empresa de TI / Software House</h3>
+                    <p class="font-mono text-xs text-gray-500 mb-4">Suporte técnico terceirizado (50–250 colaboradores)
+                    </p>
+                    <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                        <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i
+                                data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                        <p class="text-xs text-gray-700 leading-tight">Alto volume de empréstimos de equipamentos para
+                            devs, estagiários e técnicos em campo; dificuldade em saber quem está com qual máquina para
+                            upgrades ou recalls.</p>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Login via QR + PIN
+                                    agiliza acesso em estações compartilhadas ou em campo.</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Fluxo de solicitação
+                                    → aprovação → confirmação de entrega por scan do QR do técnico.</span></li>
+                            <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle"
+                                    size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Dashboard mostra %
+                                    de ativos em uso vs. disponíveis, ajudando na compra planejada.</span></li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-4 border-t-2 border-black">
+                        <p class="font-mono text-xs"><span
+                                class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Processo de
+                            onboarding/offboarding muito mais rápido e seguro; menos risco de multas por licenças ou
+                            perda de hardware caro.</p>
+                    </div>
+                </div>
+
+                <!-- CTA Card -->
+                <div
+                    class="bg-industrial-accent p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] flex flex-col justify-center items-center text-center">
+                    <h3 class="font-black text-3xl uppercase text-white mb-4">Sua empresa se encaixa?</h3>
+                    <p class="font-mono text-white/90 text-sm mb-6 max-w-sm">
+                        Temos soluções adaptáveis para o porte e segmento da sua organização.
+                    </p>
+                    <a href="https://wa.me/5554991680204?text=Gostaria%20de%20saber%20mais%20sobre%3F" target="_blank"
+                        rel="noopener noreferrer" class="w-full">
+                        <button
+                            class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-white bg-white text-black shadow-hard hover:bg-gray-100 w-full flex justify-center items-center gap-2">
+                            FALAR COM DESENVOLVEDOR <i data-lucide="arrow-right" size="16"></i>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-white border-t-2 border-black py-12">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-4">
-                <div class="w-10 h-10 bg-black flex items-center justify-center text-white font-black text-lg mx-auto mb-2">A</div>
+                <div
+                    class="w-10 h-10 bg-black flex items-center justify-center text-white font-black text-lg mx-auto mb-2">
+                    A</div>
                 <h3 class="font-black text-xl uppercase tracking-tighter">AssetTrack TI</h3>
                 <p class="font-mono text-xs text-gray-500">SYSTEM V2.0.4</p>
             </div>
@@ -920,6 +1270,13 @@
 
     <!-- Scripts -->
     <script>
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         // Initialize Lucide icons
         lucide.createIcons();
 
@@ -936,7 +1293,7 @@
             const list = document.getElementById('requests-list');
             const count = list.children.length;
             document.getElementById('request-count').innerText = count;
-            
+
             if (count === 0) {
                 document.getElementById('requests-empty').classList.remove('hidden');
                 document.getElementById('requests-empty').classList.add('flex');
@@ -957,7 +1314,7 @@
         function switchTab(index) {
             // Hide all contents
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            
+
             // Show selected content
             document.getElementById('tab-content-' + index).classList.remove('hidden');
 
@@ -973,7 +1330,7 @@
                     btn.classList.remove('bg-black', 'text-white', 'shadow-hard');
                 }
             });
-            
+
             // Update Icon Title
             document.getElementById('module-title').innerText = 'Módulo: ' + tabData[index].title;
             // Update Icon (recreate it)
@@ -985,4 +1342,5 @@
         }
     </script>
 </body>
+
 </html>

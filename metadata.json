@@ -1,0 +1,7 @@
+{
+  "name": "AssetTrack TI",
+  "description": "Industrial-grade IT Asset Management System with AI-powered visual analysis capabilities.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

@@ -5,13 +5,11 @@ import { WorkflowDiagram } from './components/WorkflowDiagram';
 import { DashboardPreview } from './components/DashboardPreview';
 import { VisualsGallery } from './components/VisualsGallery';
 import { CommercialCases } from './components/CommercialCases';
-import { SEO } from './components/SEO';
 import { Shield, Box, Activity, Server } from 'lucide-react';
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-50 text-industrial-black font-sans selection:bg-industrial-accent selection:text-white scroll-smooth">
-      <SEO />
 
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-white border-b-2 border-black px-6 py-4 flex justify-between items-center shadow-md">

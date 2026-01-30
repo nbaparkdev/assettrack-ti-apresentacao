@@ -1,21 +1,13 @@
-# Build Stage
-FROM node:18-alpine as builder
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-RUN npm run build
-
-# Production Stage
+# Static Site Deployment
 FROM nginx:alpine
 
-# Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy public assets (images, icons)
+COPY public/ /usr/share/nginx/html/
 
-# Copy custom nginx config
+# Copy the static HTML file and rename it to index.html
+COPY index_static.html /usr/share/nginx/html/index.html
+
+# Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

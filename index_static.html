@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AssetTrack TI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'Courier New', 'monospace'],
+                    },
+                    colors: {
+                        industrial: {
+                            black: '#1a1a1a',
+                            gray: '#e5e5e5',
+                            darkGray: '#404040',
+                            accent: '#ff4d00', // Safety Orange
+                            success: '#00cc66',
+                            warning: '#ffcc00',
+                        }
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'hard-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body
+    class="min-h-screen bg-gray-50 text-industrial-black font-sans selection:bg-industrial-accent selection:text-white">
+
+    <!-- Navbar -->
+    <nav
+        class="sticky top-0 z-50 bg-white border-b-2 border-black px-6 py-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-black flex items-center justify-center text-white font-black text-lg">A</div>
+            <span class="font-black text-xl tracking-tighter uppercase">AssetTrack TI</span>
+        </div>
+        <div class="hidden md:flex gap-6 font-mono text-sm font-bold">
+            <a href="#visuals"
+                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">VISUALIZAÇÃO</a>
+            <a href="#dashboard-preview"
+                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DASHBOARD</a>
+            <a href="#cases"
+                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">DOCUMENTAÇÃO</a>
+            <a href="#workflow"
+                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">WORKFLOW</a>
+            <a href="#specs"
+                class="hover:text-industrial-accent hover:underline decoration-2 underline-offset-4 transition-all">ESPECIFICAÇÕES</a>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-black text-white shadow-hard text-xs px-4 py-2 hidden md:block">LOGIN</button>
+            <button
+                class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-accent text-white shadow-hard hover:-translate-y-[2px] hover:-translate-x-[2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-xs px-4 py-2">DEMO</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-white border-b-2 border-black overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-1/3 h-full bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] bg-cover opacity-10 border-l-2 border-black grayscale">
+        </div>
+        <div class="container mx-auto px-6 py-24 relative z-10">
+            <span
+                class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">V
+                2.0.4 PRODUCTION READY</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mt-4 mb-6 max-w-4xl leading-[0.9]">
+                Sistema de Gestão <br />
+                <span class="text-industrial-accent text-outline-black">AssetTrack TI</span>
+            </h1>
+            <p
+                class="text-xl md:text-2xl font-mono text-gray-600 mb-10 max-w-2xl border-l-4 border-industrial-accent pl-6">
+                Plataforma Industrial para Rastreamento de Ativos, Autenticação QR e Inspeção Visual Inteligente.
+            </p>
+            <div className="flex flex-col md:flex-row gap-4">
+                <button
+                    class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-industrial-accent text-white shadow-hard hover:-translate-y-[2px] hover:-translate-x-[2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">SOLICITAR
+                    ACESSO</button>
+                <button
+                    class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-transparent text-black shadow-hard hover:bg-gray-100">DOCUMENTAÇÃO
+                    API</button>
+            </div>
+
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 border-t-2 border-black pt-8">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="shield" class="w-8 h-8 text-industrial-accent"></i>
+                    <div>
+                        <h3 class="font-black text-lg">JWT + QR</h3>
+                        <p class="font-mono text-xs text-gray-500">AUTH DUPLA</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="server" class="w-8 h-8 text-industrial-accent"></i>
+                    <div>
+                        <h3 class="font-black text-lg">FastAPI</h3>
+                        <p class="font-mono text-xs text-gray-500">PYTHON 3.11</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="activity" class="w-8 h-8 text-industrial-accent"></i>
+                    <div>
+                        <h3 class="font-black text-lg">Real-time</h3>
+                        <p class="font-mono text-xs text-gray-500">RASTREAMENTO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Visuals Gallery -->
+    <section id="visuals" class="py-20 bg-gray-100 border-b-2 border-black">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="smartphone" class="w-8 h-8"></i>
+                <h2 class="text-3xl font-black uppercase">Identidade & Dispositivos</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Visual 1: Digital User Badge -->
+                <div
+                    class="bg-white p-6 shadow-hard border-2 border-black flex flex-col items-center group hover:border-industrial-accent transition-colors">
+                    <h3 class="font-mono font-bold uppercase mb-6 self-start border-b-2 border-industrial-accent">01.
+                        Crachá Digital (Mobile)</h3>
+                    <div
+                        class="w-64 bg-industrial-black text-white p-4 border-4 border-gray-800 rounded-sm relative shadow-2xl transition-transform group-hover:scale-105 cursor-default">
+                        <div class="absolute top-2 right-2 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <div class="flex flex-col items-center mt-4">
+                            <div class="w-24 h-24 bg-white p-1 mb-4">
+                                <i data-lucide="qr-code" class="w-full h-full text-black"></i>
+                            </div>
+                            <h4 class="font-black text-xl uppercase tracking-widest">TECNICO</h4>
+                            <p class="font-mono text-xs text-gray-400">ID: #88291-TX</p>
+                            <div class="mt-6 w-full border-t border-gray-700 pt-4">
+                                <div class="flex justify-between text-xs font-mono mb-2">
+                                    <span class="text-gray-500">NÍVEL</span>
+                                    <span class="text-industrial-accent">L2 ACCESS</span>
+                                </div>
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-500">EXPIRA</span>
+                                    <span>24H</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual 2: Asset Tag -->
+                <div
+                    class="bg-white p-6 shadow-hard border-2 border-black flex flex-col items-center group hover:border-industrial-accent transition-colors">
+                    <h3 class="font-mono font-bold uppercase mb-6 self-start border-b-2 border-industrial-accent">02.
+                        Etiqueta de Ativo</h3>
+                    <div
+                        class="w-full max-w-sm bg-gray-200 border-4 border-black p-4 relative transition-transform group-hover:rotate-1 cursor-default shadow-sm">
+                        <div class="flex gap-4">
+                            <div class="w-24 h-24 bg-black p-2 flex items-center justify-center">
+                                <i data-lucide="qr-code" class="text-white w-full h-full"></i>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-black text-2xl uppercase leading-none">MacBook Pro</h4>
+                                    <span class="font-mono text-xs block mt-1">S/N: C02X8291L</span>
+                                </div>
+                                <div class="flex gap-2 mt-2">
+                                    <span
+                                        class="bg-industrial-accent text-white font-bold text-xs px-2 py-1">TI-DEV</span>
+                                    <span class="bg-black text-white font-bold text-xs px-2 py-1">EM USO</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -right-2 -bottom-2 bg-black text-white px-2 font-mono text-xs">PROPERTY OF
+                            ASSETTRACK</div>
+                    </div>
+                    <div class="mt-auto pt-6 text-center">
+                        <div class="font-mono text-xs text-gray-500">
+                            Gera PDF/ZPL automático para impressoras térmicas (Zebra/Brother).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual 3: Mini Dashboard -->
+                <div
+                    class="bg-white p-6 shadow-hard border-2 border-black group hover:border-industrial-accent transition-colors hidden lg:block">
+                    <h3 class="font-mono font-bold uppercase mb-6 border-b-2 border-industrial-accent inline-block">03.
+                        Analytics Widget</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-end justify-between h-32 px-2 border-b-2 border-black pb-1">
+                            <div class="w-8 bg-gray-300 relative group-hover:bg-gray-400 transition-colors h-[60%]">
+                            </div>
+                            <div
+                                class="w-8 bg-industrial-accent relative h-[80%] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            </div>
+                            <div class="w-8 bg-gray-300 relative group-hover:bg-gray-400 transition-colors h-[40%]">
+                            </div>
+                            <div class="w-8 bg-gray-300 relative group-hover:bg-gray-400 transition-colors h-[90%]">
+                            </div>
+                            <div class="w-8 bg-gray-300 relative group-hover:bg-gray-400 transition-colors h-[50%]">
+                            </div>
+                        </div>
+                        <div class="flex justify-between font-mono text-[10px] text-gray-500">
+                            <span>SEG</span>
+                            <span>TER</span>
+                            <span>QUA</span>
+                            <span>QUI</span>
+                            <span>SEX</span>
+                        </div>
+                        <div
+                            class="bg-black text-white p-3 font-mono text-xs mt-4 flex justify-between items-center shadow-hard-sm">
+                            <span>TOTAL:</span>
+                            <span class="font-bold text-industrial-accent text-lg">1,402</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section id="dashboard-preview" class="py-16 bg-white border-b-2 border-black">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="activity" class="w-8 h-8 text-industrial-accent"></i>
+                <h2 class="text-3xl font-black uppercase">Interface: Dashboard Gerencial</h2>
+            </div>
+
+            <div class="bg-gray-100 p-2 md:p-6 border-2 border-black shadow-hard">
+                <!-- Fake Browser UI / App Header -->
+                <div
+                    class="flex flex-col md:flex-row justify-between items-center bg-white border-2 border-black p-4 mb-6 gap-4">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div
+                            class="w-10 h-10 bg-industrial-black text-white flex items-center justify-center font-bold text-lg border-2 border-gray-400">
+                            <i data-lucide="menu" size="20"></i>
+                        </div>
+                        <div class="flex-1 md:flex-none">
+                            <h3 class="font-bold uppercase leading-none text-sm md:text-base">Painel de Controle</h3>
+                            <span class="font-mono text-xs text-green-600 flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> ONLINE
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                        <div class="relative mr-2 hidden md:block">
+                            <input type="text" placeholder="BUSCAR ATIVO..."
+                                class="border-2 border-black pl-8 pr-2 py-2 text-xs font-mono w-48 focus:w-64 transition-all" />
+                            <i data-lucide="search" class="absolute left-2 top-2.5 w-4 h-4 text-gray-400"></i>
+                        </div>
+                        <button
+                            class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-transparent text-black shadow-hard hover:bg-gray-100 py-2 px-3 text-xs whitespace-nowrap">+
+                            ATIVO</button>
+                        <button
+                            class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none bg-transparent text-black shadow-hard hover:bg-gray-100 py-2 px-3 text-xs whitespace-nowrap">SCANNER</button>
+                        <div
+                            class="w-10 h-10 border-2 border-black flex items-center justify-center hover:bg-gray-100 cursor-pointer relative">
+                            <i data-lucide="bell" size="20"></i>
+                            <div class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div
+                        class="bg-white border-2 border-black p-4 shadow-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-shadow cursor-default">
+                        <div class="font-mono text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-2">Total
+                            Ativos</div>
+                        <div class="text-3xl font-black text-black leading-none mb-2">1,240</div>
+                        <div class="font-mono text-[10px] text-gray-400 border-t border-gray-100 pt-1">+12 essa semana
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white border-2 border-black p-4 shadow-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-shadow cursor-default">
+                        <div class="font-mono text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-2">Em Uso
+                        </div>
+                        <div class="text-3xl font-black text-green-600 leading-none mb-2">892</div>
+                        <div class="font-mono text-[10px] text-gray-400 border-t border-gray-100 pt-1">72% da frota
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white border-2 border-black p-4 shadow-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-shadow cursor-default">
+                        <div class="font-mono text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-2">
+                            Disponíveis</div>
+                        <div class="text-3xl font-black text-blue-600 leading-none mb-2">315</div>
+                        <div class="font-mono text-[10px] text-gray-400 border-t border-gray-100 pt-1">Estoque Central
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white border-2 border-black p-4 shadow-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-shadow cursor-default">
+                        <div class="font-mono text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-2">
+                            Manutenção</div>
+                        <div class="text-3xl font-black text-orange-600 leading-none mb-2">33</div>
+                        <div class="font-mono text-[10px] text-gray-400 border-t border-gray-100 pt-1">4 críticos</div>
+                    </div>
+                </div>
+
+                <!-- Main Dashboard Content -->
+                <div class="grid lg:grid-cols-3 gap-6">
+
+                    <!-- Left Column: Requests -->
+                    <div class="lg:col-span-2 bg-white border-2 border-black flex flex-col">
+                        <div
+                            class="bg-industrial-black text-white p-3 font-bold uppercase text-xs md:text-sm flex justify-between items-center">
+                            <span class="flex items-center gap-2"><i data-lucide="user" size="16"></i> Solicitações
+                                Pendentes</span>
+                            <span id="request-count"
+                                class="bg-industrial-accent text-black px-2 py-0.5 text-xs font-bold rounded-full">3</span>
+                        </div>
+                        <div class="p-4 flex-1">
+                            <div id="requests-empty"
+                                class="h-full flex flex-col items-center justify-center py-8 text-gray-400 font-mono text-sm opacity-50 hidden">
+                                <i data-lucide="check-circle" size="48" class="mb-2"></i>
+                                <p>Tudo limpo! Nenhuma pendência.</p>
+                            </div>
+                            <div id="requests-list" class="space-y-3">
+                                <div id="req-101"
+                                    class="flex flex-col md:flex-row justify-between items-start md:items-center border border-gray-300 p-3 bg-gray-50 hover:border-black transition-colors group">
+                                    <div class="flex items-center gap-3 mb-3 md:mb-0">
+                                        <div
+                                            class="w-10 h-10 bg-white border border-black flex items-center justify-center font-black text-gray-300">
+                                            A</div>
+                                        <div>
+                                            <div class="font-bold text-sm uppercase flex items-center gap-2">
+                                                Ana Silva
+                                                <span
+                                                    class="text-[10px] bg-gray-200 px-1 text-gray-600 border border-gray-400">DESIGN</span>
+                                            </div>
+                                            <div class="font-mono text-xs text-gray-500 mt-0.5">
+                                                <span class="text-industrial-accent font-bold">Empréstimo</span> •
+                                                MacBook Pro M2
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 w-full md:w-auto pl-14 md:pl-0">
+                                        <button onclick="removeRequest(101)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-green-100 text-green-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="check-circle" size="14"></i> APROVAR
+                                        </button>
+                                        <button onclick="removeRequest(101)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-red-100 text-red-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="x-circle" size="14"></i> REJEITAR
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="req-102"
+                                    class="flex flex-col md:flex-row justify-between items-start md:items-center border border-gray-300 p-3 bg-gray-50 hover:border-black transition-colors group">
+                                    <div class="flex items-center gap-3 mb-3 md:mb-0">
+                                        <div
+                                            class="w-10 h-10 bg-white border border-black flex items-center justify-center font-black text-gray-300">
+                                            C</div>
+                                        <div>
+                                            <div class="font-bold text-sm uppercase flex items-center gap-2">
+                                                Carlos Dev
+                                                <span
+                                                    class="text-[10px] bg-gray-200 px-1 text-gray-600 border border-gray-400">DEV_OPS</span>
+                                            </div>
+                                            <div class="font-mono text-xs text-gray-500 mt-0.5">
+                                                <span class="text-industrial-accent font-bold">Manutenção</span> •
+                                                Monitor Dell 27"
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 w-full md:w-auto pl-14 md:pl-0">
+                                        <button onclick="removeRequest(102)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-green-100 text-green-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="check-circle" size="14"></i> APROVAR
+                                        </button>
+                                        <button onclick="removeRequest(102)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-red-100 text-red-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="x-circle" size="14"></i> REJEITAR
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="req-103"
+                                    class="flex flex-col md:flex-row justify-between items-start md:items-center border border-gray-300 p-3 bg-gray-50 hover:border-black transition-colors group">
+                                    <div class="flex items-center gap-3 mb-3 md:mb-0">
+                                        <div
+                                            class="w-10 h-10 bg-white border border-black flex items-center justify-center font-black text-gray-300">
+                                            B</div>
+                                        <div>
+                                            <div class="font-bold text-sm uppercase flex items-center gap-2">
+                                                Beatriz UX
+                                                <span
+                                                    class="text-[10px] bg-gray-200 px-1 text-gray-600 border border-gray-400">PRODUCT</span>
+                                            </div>
+                                            <div class="font-mono text-xs text-gray-500 mt-0.5">
+                                                <span class="text-industrial-accent font-bold">Devolução</span> • Wacom
+                                                Tablet
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 w-full md:w-auto pl-14 md:pl-0">
+                                        <button onclick="removeRequest(103)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-green-100 text-green-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="check-circle" size="14"></i> APROVAR
+                                        </button>
+                                        <button onclick="removeRequest(103)"
+                                            class="flex-1 md:flex-none bg-white border border-black px-3 py-2 hover:bg-red-100 text-red-700 font-mono text-xs font-bold flex items-center justify-center gap-1 transition-colors">
+                                            <i data-lucide="x-circle" size="14"></i> REJEITAR
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Activity Log -->
+                    <div class="bg-white border-2 border-black flex flex-col">
+                        <div
+                            class="bg-gray-100 text-black border-b-2 border-black p-3 font-bold uppercase text-xs md:text-sm flex items-center gap-2">
+                            <i data-lucide="activity" size="16"></i> Atividade Recente (Log)
+                        </div>
+                        <div class="p-4 flex-1 overflow-y-auto max-h-[300px] scrollbar-thin">
+                            <div class="relative border-l-2 border-gray-300 ml-2 space-y-8 pl-6 py-2">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute -left-[31px] top-0 w-3 h-3 rounded-full border-2 border-white shadow-sm bg-green-500">
+                                    </div>
+                                    <div class="font-mono text-[10px] text-gray-400 mb-1 flex justify-between">
+                                        <span>10:30</span>
+                                        <span
+                                            class="text-gray-300 group-hover:text-black transition-colors">Admin</span>
+                                    </div>
+                                    <div class="font-bold text-xs leading-tight text-gray-800">Entrega confirmada:
+                                        NB-DELL-09</div>
+                                </div>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute -left-[31px] top-0 w-3 h-3 rounded-full border-2 border-white shadow-sm bg-orange-500">
+                                    </div>
+                                    <div class="font-mono text-[10px] text-gray-400 mb-1 flex justify-between">
+                                        <span>09:15</span>
+                                        <span class="text-gray-300 group-hover:text-black transition-colors">Tech
+                                            Lead</span>
+                                    </div>
+                                    <div class="font-bold text-xs leading-tight text-gray-800">Baixa de ativo:
+                                        MOUSE-LOGI-02</div>
+                                </div>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute -left-[31px] top-0 w-3 h-3 rounded-full border-2 border-white shadow-sm bg-blue-500">
+                                    </div>
+                                    <div class="font-mono text-[10px] text-gray-400 mb-1 flex justify-between">
+                                        <span>08:45</span>
+                                        <span
+                                            class="text-gray-300 group-hover:text-black transition-colors">Admin</span>
+                                    </div>
+                                    <div class="font-bold text-xs leading-tight text-gray-800">Novo cadastro:
+                                        IPAD-PRO-11</div>
+                                </div>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute -left-[31px] top-0 w-3 h-3 rounded-full border-2 border-white shadow-sm bg-orange-500">
+                                    </div>
+                                    <div class="font-mono text-[10px] text-gray-400 mb-1 flex justify-between">
+                                        <span>Ontem</span>
+                                        <span
+                                            class="text-gray-300 group-hover:text-black transition-colors">Manager</span>
+                                    </div>
+                                    <div class="font-bold text-xs leading-tight text-gray-800">Manutenção iniciada:
+                                        SRV-RACK-01</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-t-2 border-black bg-gray-50 text-center">
+                            <a href="#" class="font-mono text-xs text-industrial-accent hover:underline font-bold">VER
+                                LOG COMPLETO -></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Diagram -->
+    <section id="workflow" class="py-16 bg-gray-50 border-b-2 border-black">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="shield-check" class="w-8 h-8 text-industrial-accent"></i>
+                <h2 class="text-3xl font-black uppercase">Workflow: Confirmação de Entrega</h2>
+            </div>
+
+            <div class="relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-300 -translate-y-1/2 z-0"></div>
+
+                <div class="grid md:grid-cols-4 gap-6 relative z-10">
+                    <!-- Step 1 -->
+                    <div
+                        class="bg-white p-6 border-2 border-black shadow-hard flex flex-col items-center text-center group hover:-translate-y-2 transition-transform">
+                        <div
+                            class="w-12 h-12 bg-black text-white flex items-center justify-center rounded-full mb-4 font-black text-xl border-4 border-white">
+                            1</div>
+                        <h3 class="font-bold uppercase text-sm mb-2">Solicitação Aprovada</h3>
+                        <p class="font-mono text-xs text-gray-500">Gerente libera o ativo no sistema.</p>
+                        <div
+                            class="mt-4 px-2 py-1 bg-green-100 text-green-800 font-mono text-xs border border-green-800">
+                            STATUS: APROVADO</div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div
+                        class="bg-white p-6 border-2 border-black shadow-hard flex flex-col items-center text-center group hover:-translate-y-2 transition-transform">
+                        <div
+                            class="w-12 h-12 bg-industrial-accent text-white flex items-center justify-center rounded-full mb-4 font-black text-xl border-4 border-white">
+                            2</div>
+                        <h3 class="font-bold uppercase text-sm mb-2">Ação de Entrega</h3>
+                        <p class="font-mono text-xs text-gray-500">Admin visualiza botão "Confirmar Entrega".</p>
+                        <div class="mt-4 px-2 py-1 bg-gray-100 font-mono text-xs border border-gray-400">
+                            /confirmar-entrega</div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div
+                        class="bg-white p-6 border-2 border-black shadow-hard flex flex-col items-center text-center group hover:-translate-y-2 transition-transform">
+                        <div
+                            class="w-12 h-12 bg-white text-black flex items-center justify-center rounded-full mb-4 border-4 border-black">
+                            <i data-lucide="smartphone" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold uppercase text-sm mb-2">Validação Segura</h3>
+                        <p class="font-mono text-xs text-gray-500">Admin escaneia QR Code do Crachá do Usuário.</p>
+                        <div class="mt-4 flex gap-1 justify-center">
+                            <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                            <span class="font-mono text-xs font-bold text-red-600">SCANNING</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div
+                        class="bg-white p-6 border-2 border-black shadow-hard flex flex-col items-center text-center group hover:-translate-y-2 transition-transform">
+                        <div
+                            class="w-12 h-12 bg-green-500 text-white flex items-center justify-center rounded-full mb-4 font-black text-xl border-4 border-white">
+                            <i data-lucide="check-circle" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold uppercase text-sm mb-2">Entrega Concluída</h3>
+                        <p class="font-mono text-xs text-gray-500">Ativo transferido. Log de auditoria gerado.</p>
+                        <div
+                            class="mt-4 px-2 py-1 bg-green-100 text-green-800 font-mono text-xs border border-green-800">
+                            STATUS: ENTREGUE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Module Showcase Start -->
+    <section class="py-16 bg-white border-b-2 border-black" id="specs">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl font-black uppercase flex items-center gap-2">
+                        <i data-lucide="activity" class="text-industrial-accent"></i>
+                        Especificações Técnicas
+                    </h2>
+                    <p class="font-mono text-gray-500 mt-2 max-w-xl">
+                        Detalhamento completo das rotas, permissões e fluxos de dados do sistema AssetTrack TI.
+                    </p>
+                </div>
+                <div class="font-mono text-xs text-right hidden md:block">
+                    LAST UPDATE: 2024-05-20<br/>
+                    DOC_ID: #8821-X
+                </div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b-2 border-dashed border-gray-300 pb-4">
+                <button onclick="switchTab(0)" id="tab-btn-0" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-black text-white shadow-hard transition-all">Autenticação</button>
+                <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Ativos</button>
+                <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Solicitações</button>
+                <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Manutenção</button>
+                <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Histórico</button>
+                <button onclick="switchTab(5)" id="tab-btn-5" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Segurança</button>
+                <button onclick="switchTab(6)" id="tab-btn-6" class="tab-btn px-4 py-2 font-mono font-bold text-xs uppercase border-2 border-black bg-white text-black hover:bg-gray-100 transition-all">Admin</button>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 animate-fadeIn">
+                <div class="lg:col-span-2">
+                    
+                    <!-- Tab Content 0: Autenticação -->
+                    <div id="tab-content-0" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px]">
+                        <div class="space-y-6">
+                           <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                               <table class="w-full text-left border-collapse min-w-[600px]">
+                                   <thead class="bg-industrial-black text-white">
+                                       <tr>
+                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th>
+                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th>
+                                           <th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Descrição</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                       <tr><td class="p-3 font-bold">Login</td><td class="p-3 text-gray-600">/login</td><td class="p-3">JWT Http-only</td></tr>
+                                       <tr><td class="p-3 font-bold">Login QR</td><td class="p-3 text-gray-600">/login/qr</td><td class="p-3">Auth Alternativa (QR+PIN)</td></tr>
+                                       <tr><td class="p-3 font-bold">Meu QR</td><td class="p-3 text-gray-600">/meu-qrcode</td><td class="p-3">Crachá Digital</td></tr>
+                                       <tr><td class="p-3 font-bold">Perfil</td><td class="p-3 text-gray-600">/profile</td><td class="p-3">Dados Pessoais</td></tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                           <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">ADMIN</div>
+                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">GERENTE_TI</div>
+                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">TECNICO</div>
+                               <div class="bg-black text-white font-mono text-center p-2 text-xs border-2 border-white shadow-md">USUARIO</div>
+                           </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 1: Ativos -->
+                    <div id="tab-content-1" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                         <div class="space-y-4">
+                            <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                <table class="w-full text-left border-collapse min-w-[600px]">
+                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Endpoint</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                        <tr><td class="p-3 font-bold">Listar Ativos</td><td class="p-3">/assets</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Detalhes</td><td class="p-3">/assets/{id}</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Novo Ativo</td><td class="p-3">/assets/new</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Scanner</td><td class="p-3">/assets/scanner</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Baixa</td><td class="p-3">/assets/{id}/baixa</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Disponível</span>
+                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Em Uso</span>
+                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Manutenção</span>
+                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Armazenado</span>
+                                <span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Baixado</span>
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Tab Content 2: Solicitações -->
+                    <div id="tab-content-2" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="space-y-6">
+                            <p class="font-mono text-sm text-gray-600">Gerenciamento de empréstimos e transferências de custódia.</p>
+                            <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                <table class="w-full text-left border-collapse min-w-[600px]">
+                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                        <tr><td class="p-3 font-bold">Minhas Solicitações</td><td class="p-3">/solicitacoes</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Nova Solicitação</td><td class="p-3">/solicitacoes/new</td><td class="p-3"><span class="bg-gray-200 text-black border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Todos</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Aprovar</td><td class="p-3">/admin/solicitacoes/{id}/approve</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                        <tr><td class="p-3 font-bold">Rejeitar</td><td class="p-3">/admin/solicitacoes/{id}/reject</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 3: Manutenção -->
+                    <div id="tab-content-3" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                            <table class="w-full text-left border-collapse min-w-[600px]">
+                                <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                    <tr><td class="p-3 font-bold">Listar Manutenções</td><td class="p-3">/maintenance</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                    <tr><td class="p-3 font-bold">Registrar</td><td class="p-3">/assets/{id}/manutencao</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                    <tr><td class="p-3 font-bold">Finalizar</td><td class="p-3">/maintenance/{id}/complete</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 4: Histórico -->
+                    <div id="tab-content-4" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="space-y-4">
+                            <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                <table class="w-full text-left border-collapse min-w-[600px]">
+                                    <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Funcionalidade</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                    <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                        <tr><td class="p-3 font-bold">Ver Histórico</td><td class="p-3">/movimentacoes</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="border-2 border-dashed border-gray-400 p-4 bg-gray-50">
+                                <h4 class="font-bold text-sm uppercase mb-3">Tipos de Movimentação (Log)</h4>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">EMPRESTIMO</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">DEVOLUCAO</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">TRANSFERENCIA</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">MANUTENCAO</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">BAIXA</span></div>
+                                    <div class="flex items-center gap-2"><div class="w-2 h-2 bg-industrial-accent"></div><span class="font-mono text-xs">CADASTRO</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 5: Segurança -->
+                    <div id="tab-content-5" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-black text-white p-4 border border-gray-700">
+                                    <h4 class="font-bold text-industrial-accent mb-2">Rate Limiting (SlowAPI)</h4>
+                                    <ul class="text-xs font-mono space-y-1">
+                                        <li>Login QR: 10/min</li>
+                                        <li>Regenerar Token: 3/hora</li>
+                                        <li>Configurar PIN: 5/hora</li>
+                                        <li>Consulta Perfil: 30/min</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white border-2 border-black p-4">
+                                    <h4 class="font-bold mb-2">Protocolos</h4>
+                                    <ul class="text-xs font-mono space-y-1">
+                                        <li>• JWT HTTP-only Cookies</li>
+                                        <li>• PIN Hashing (Bcrypt)</li>
+                                        <li>• Expiração Token QR: 90 dias</li>
+                                        <li>• Logs de Auditoria Completos</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content 6: Admin -->
+                    <div id="tab-content-6" class="tab-content bg-white border-2 border-black shadow-hard p-6 h-full min-h-[400px] hidden">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Gestão de Usuários</h4>
+                                <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                    <table class="w-full text-left border-collapse min-w-[600px]">
+                                        <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                        <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                            <tr><td class="p-3 font-bold">Listar</td><td class="p-3">/admin/users</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                            <tr><td class="p-3 font-bold">Editar</td><td class="p-3">/users/{id}/edit</td><td class="p-3"><span class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
+                                            <tr><td class="p-3 font-bold">Ativar/Desativar</td><td class="p-3">/users/{id}/toggle</td><td class="p-3"><span class="bg-black text-white border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold uppercase text-sm mb-2 text-industrial-accent">Departamentos (Setores)</h4>
+                                <div class="overflow-x-auto border-2 border-black shadow-hard-sm bg-white">
+                                    <table class="w-full text-left border-collapse min-w-[600px]">
+                                        <thead class="bg-industrial-black text-white"><tr><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Ação</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Rota</th><th class="p-3 font-mono text-xs md:text-sm uppercase tracking-wider border-r border-gray-600 last:border-r-0">Permissão</th></tr></thead>
+                                        <tbody class="divide-y-2 divide-black font-mono text-xs md:text-sm">
+                                            <tr><td class="p-3 font-bold">Gerenciar</td><td class="p-3">/setores</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                            <tr><td class="p-3 font-bold">Criar</td><td class="p-3">/setores/new</td><td class="p-3"><span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">Admin/Gerente</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Right Side Icon (Dynamic based on logic, but static here for simplicity unless added via JS) -->
+                <div class="space-y-6">
+                    <div class="bg-industrial-black text-white p-6 border-2 border-black shadow-hard h-full flex flex-col justify-center items-center text-center">
+                        <div class="p-4 bg-industrial-accent rounded-full mb-4 text-black">
+                             <i id="module-icon" data-lucide="lock" class="w-8 h-8"></i>
+                        </div>
+                        <h3 id="module-title" class="font-bold text-xl uppercase mb-2">Módulo: Autenticação</h3>
+                        <p class="font-mono text-sm text-gray-400">
+                            Este módulo integra diretamente com o backend FastAPI e utiliza validação via Pydantic Schemas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Commercial Cases -->
+        <section id="cases" class="py-20 bg-industrial-black text-white border-b-2 border-black">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div>
+            <span class="bg-orange-200 text-orange-900 border border-black font-mono text-xs px-2 py-1 uppercase whitespace-nowrap">DOCUMENTAÇÃO COMERCIAL</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mt-4">
+              Soluções por Setor
+            </h2>
+          </div>
+          <p class="font-mono text-gray-400 max-w-md text-sm md:text-base border-l-2 border-industrial-accent pl-4">
+            O AssetTrack TI resolve dores reais: visibilidade, responsabilização e agilidade em organizações com 50 a 1.500 ativos.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Case 1 -->
+            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                <div class="p-3 bg-black text-white"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">01</span>
+              </div>
+              <h3 class="font-black text-xl uppercase mb-1">Empresa de Médio Porte (Serviços)</h3>
+              <p class="font-mono text-xs text-gray-500 mb-4">Consultoria, Contabilidade, Advocacia (150–400 funcionários)</p>
+              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                <p class="text-xs text-gray-700 leading-tight">Muitos notebooks, monitores e acessórios 'sumiam' entre home office e escritório. Planilhas Excel desatualizadas geravam brigas sobre quem era responsável por qual equipamento.</p>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Cada colaborador tem seu crachá digital com QR Code no celular.</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ao receber um notebook novo, o gerente de TI escaneia o QR do ativo + o QR do usuário para confirmar entrega e transferir custódia automaticamente.</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando o funcionário pede transferência (ex.: troca de departamento), cria uma solicitação, aprovação rápida e nova confirmação por QR.</span></li>
+                </ul>
+              </div>
+              <div class="mt-auto pt-4 border-t-2 border-black">
+                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Redução de 70–80% em extravios e discussões; auditoria fácil para compliance fiscal/contábil.</p>
+              </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                <div class="p-3 bg-black text-white"><i data-lucide="store" class="w-6 h-6"></i></div>
+                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">02</span>
+              </div>
+              <h3 class="font-black text-xl uppercase mb-1">Rede de Varejo ou Franquias</h3>
+              <p class="font-mono text-xs text-gray-500 mb-4">Lojas de eletrônicos, farmácias, fast-food (20–80 unidades)</p>
+              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                <p class="text-xs text-gray-700 leading-tight">Equipamentos de PDV, impressoras fiscais, tablets de vendas e smartphones corporativos se perdiam entre filiais; manutenção demorada por falta de histórico.</p>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Ativos recebem QR Code na aquisição e são cadastrados com localização (filial + setor).</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Técnico de campo escaneia QR do ativo + QR do gerente da loja para confirmar entrega/instalação.</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Quando um equipamento vai para manutenção, o status muda para 'Manutenção' e o histórico registra tudo.</span></li>
+                </ul>
+              </div>
+              <div class="mt-auto pt-4 border-t-2 border-black">
+                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Controle centralizado sem precisar ligar para cada filial; redução significativa em custos de reposição desnecessária.</p>
+              </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                <div class="p-3 bg-black text-white"><i data-lucide="factory" class="w-6 h-6"></i></div>
+                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">03</span>
+              </div>
+              <h3 class="font-black text-xl uppercase mb-1">Indústria ou Manufatura</h3>
+              <p class="font-mono text-xs text-gray-500 mb-4">Fábrica, Agronegócio, Logística (Dispositivos IoT)</p>
+              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                <p class="text-xs text-gray-700 leading-tight">Tablets rugged, scanners de código de barras, notebooks de chão de fábrica e smartphones de supervisores se perdiam ou tinham manutenção mal controlada.</p>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>QR Code em cada dispositivo permite scan rápido no chão de fábrica ou no campo (sem precisar digitar número de série).</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Solicitação de empréstimo/devolução feita pelo usuário final via web (ex.: 'preciso de um tablet reserva para inventário').</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Relatórios de movimentações mostram histórico completo para auditorias de segurança do trabalho ou ISO.</span></li>
+                </ul>
+              </div>
+              <div class="mt-auto pt-4 border-t-2 border-black">
+                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Menos tempo parado por falta de equipamento; rastreabilidade total para investigações de incidentes.</p>
+              </div>
+            </div>
+
+            <!-- Case 4 -->
+            <div class="bg-white text-black p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all h-full flex flex-col">
+              <div class="flex justify-between items-start mb-4 border-b-2 border-black pb-4">
+                <div class="p-3 bg-black text-white"><i data-lucide="terminal" class="w-6 h-6"></i></div>
+                <span class="font-mono font-bold text-4xl text-gray-200 opacity-50">04</span>
+              </div>
+              <h3 class="font-black text-xl uppercase mb-1">Empresa de TI / Software House</h3>
+              <p class="font-mono text-xs text-gray-500 mb-4">Suporte técnico terceirizado (50–250 colaboradores)</p>
+              <div class="mb-4 bg-red-50 p-3 border-l-4 border-red-500">
+                <h4 class="font-bold text-xs uppercase text-red-700 flex items-center gap-1 mb-1"><i data-lucide="alert-triangle" size="12"></i> Problema Inicial</h4>
+                <p class="text-xs text-gray-700 leading-tight">Alto volume de empréstimos de equipamentos para devs, estagiários e técnicos em campo; dificuldade em saber quem está com qual máquina para upgrades ou recalls.</p>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-xs uppercase text-industrial-accent mb-2">Solução AssetTrack:</h4>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Login via QR + PIN agiliza acesso em estações compartilhadas ou em campo.</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Fluxo de solicitação → aprovação → confirmação de entrega por scan do QR do técnico.</span></li>
+                    <li class="flex items-start gap-2 text-sm leading-tight"><i data-lucide="check-circle" size="14" class="mt-0.5 text-green-600 flex-shrink-0"></i><span>Dashboard mostra % de ativos em uso vs. disponíveis, ajudando na compra planejada.</span></li>
+                </ul>
+              </div>
+              <div class="mt-auto pt-4 border-t-2 border-black">
+                <p class="font-mono text-xs"><span class="font-bold bg-industrial-accent text-white px-1">RESULTADO:</span> Processo de onboarding/offboarding muito mais rápido e seguro; menos risco de multas por licenças ou perda de hardware caro.</p>
+              </div>
+            </div>
+
+            <!-- CTA Card -->
+            <div class="bg-industrial-accent p-8 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] flex flex-col justify-center items-center text-center">
+                <h3 class="font-black text-3xl uppercase text-white mb-4">Sua empresa se encaixa?</h3>
+                <p class="font-mono text-white/90 text-sm mb-6 max-w-sm">
+                  Temos soluções adaptáveis para o porte e segmento da sua organização.
+                </p>
+                <a href="https://wa.me/5554991680204?text=Gostaria%20de%20saber%20mais%20sobre%3F" target="_blank" rel="noopener noreferrer" class="w-full">
+                  <button class="font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-white bg-white text-black shadow-hard hover:bg-gray-100 w-full flex justify-center items-center gap-2">
+                    FALAR COM DESENVOLVEDOR <i data-lucide="arrow-right" size="16"></i>
+                  </button>
+                </a>
+            </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-2 border-black py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4">
+                <div class="w-10 h-10 bg-black flex items-center justify-center text-white font-black text-lg mx-auto mb-2">A</div>
+                <h3 class="font-black text-xl uppercase tracking-tighter">AssetTrack TI</h3>
+                <p class="font-mono text-xs text-gray-500">SYSTEM V2.0.4</p>
+            </div>
+            <p class="text-sm text-gray-600 mb-8">&copy; 2024 AssetTrack TI. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dashboard Interactivity
+        function removeRequest(id) {
+            const req = document.getElementById('req-' + id);
+            if (req) {
+                req.remove();
+                updateCount();
+            }
+        }
+
+        function updateCount() {
+            const list = document.getElementById('requests-list');
+            const count = list.children.length;
+            document.getElementById('request-count').innerText = count;
+            
+            if (count === 0) {
+                document.getElementById('requests-empty').classList.remove('hidden');
+                document.getElementById('requests-empty').classList.add('flex');
+            }
+        }
+
+        // Tabs Logic
+        const tabData = [
+            { icon: 'lock', title: 'Autenticação' },
+            { icon: 'box', title: 'Ativos' },
+            { icon: 'file-text', title: 'Solicitações' },
+            { icon: 'wrench', title: 'Manutenção' },
+            { icon: 'history', title: 'Histórico' },
+            { icon: 'shield-alert', title: 'Segurança' },
+            { icon: 'building', title: 'Admin' }
+        ];
+
+        function switchTab(index) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Show selected content
+            document.getElementById('tab-content-' + index).classList.remove('hidden');
+
+            // Update Buttons logic
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                if (i === index) {
+                    // Active style
+                    btn.classList.remove('bg-white', 'text-black', 'hover:bg-gray-100');
+                    btn.classList.add('bg-black', 'text-white', 'shadow-hard');
+                } else {
+                    // Inactive style
+                    btn.classList.add('bg-white', 'text-black', 'hover:bg-gray-100');
+                    btn.classList.remove('bg-black', 'text-white', 'shadow-hard');
+                }
+            });
+            
+            // Update Icon Title
+            document.getElementById('module-title').innerText = 'Módulo: ' + tabData[index].title;
+            // Update Icon (recreate it)
+            const iconContainer = document.getElementById('module-icon').parentElement;
+            // Removing lucide content is tricky since it replaces the i tag. 
+            // easier to just clear innerHTML of container and add new i tag
+            iconContainer.innerHTML = `<i data-lucide="${tabData[index].icon}" class="w-8 h-8"></i>`;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

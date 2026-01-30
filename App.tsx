@@ -81,8 +81,6 @@ function App() {
       {/* Dashboard Preview */}
       <DashboardPreview />
 
-      {/* Commercial Cases */}
-      <CommercialCases />
 
       {/* Workflow Diagram */}
       <div id="workflow">
@@ -91,6 +89,9 @@ function App() {
 
       {/* Module Showcase (Detailed specs) */}
       <ModuleShowcase />
+
+      {/* Commercial Cases */}
+      <CommercialCases />
 
 
 

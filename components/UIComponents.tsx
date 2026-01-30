@@ -7,7 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', className = '', ...props }) => {
   const baseStyle = "font-mono font-bold text-sm uppercase px-6 py-3 border-2 border-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none";
-  
+
   const variants = {
     primary: "bg-industrial-accent text-white shadow-hard hover:-translate-y-[2px] hover:-translate-x-[2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]",
     secondary: "bg-industrial-black text-white shadow-hard",
@@ -30,8 +30,8 @@ export const Card: React.FC<{ children: React.ReactNode; className?: string; tit
         <div className="border-b-2 border-black pb-2 mb-4 flex justify-between items-center">
           <h3 className="font-sans font-black text-xl uppercase tracking-tighter">{title}</h3>
           <div className="flex gap-1">
-             <div className="w-2 h-2 bg-black"></div>
-             <div className="w-2 h-2 bg-industrial-accent"></div>
+            <div className="w-2 h-2 bg-black"></div>
+            <div className="w-2 h-2 bg-industrial-accent"></div>
           </div>
         </div>
       )}
@@ -85,11 +85,10 @@ export const Tabs: React.FC<{ tabs: string[]; activeTab: number; onChange: (i: n
         <button
           key={i}
           onClick={() => onChange(i)}
-          className={`font-mono text-xs md:text-sm font-bold uppercase px-4 py-2 border-2 border-black transition-all ${
-            activeTab === i 
-              ? 'bg-industrial-accent text-white shadow-hard -translate-y-1' 
+          className={`font-mono text-xs md:text-sm font-bold uppercase px-4 py-2 border-2 border-black transition-all ${activeTab === i
+              ? 'bg-industrial-accent text-white shadow-hard -translate-y-1'
               : 'bg-white text-black hover:bg-gray-100'
-          }`}
+            }`}
         >
           {tab}
         </button>

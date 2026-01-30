@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://assettrack.ti/sitemap.xml

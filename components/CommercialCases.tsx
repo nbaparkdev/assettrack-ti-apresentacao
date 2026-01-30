@@ -132,7 +132,7 @@ export const CommercialCases: React.FC = () => {
             </p>
             <a href="https://wa.me/5554991680204?text=Gostaria%20de%20saber%20mais%20sobre%3F" target="_blank" rel="noopener noreferrer" className="w-full">
               <Button variant="secondary" className="w-full flex justify-center items-center gap-2">
-                FALAR COM CONSULTOR <ArrowRight size={16} />
+                FALAR COM DESENVOLVEDOR <ArrowRight size={16} />
               </Button>
             </a>
           </div>
